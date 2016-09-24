@@ -6,11 +6,35 @@ Graphics::Graphics(char* windowname, int width, int height)
 	window = SDL_CreateWindow(windowname, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-	IMG_Init(IMG_INIT_PNG);
+	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
 	TTF_Init();
 
 	SDL_RenderClear(renderer);
+}
+
+Image* Graphics::NewBackground(int w, int h, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+	Image* image = new Image();
+	SDL_Rect rect;
+
+	rect.w = w;
+	rect.h = h;
+
+	image->texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, w, h);
+	SDL_SetRenderTarget(renderer, image->texture);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderClear(renderer);
+	SDL_RenderDrawRect(renderer, &rect);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+	SDL_RenderFillRect(renderer, &rect);
+	SDL_SetRenderTarget(renderer, NULL);
+	SDL_RenderCopy(renderer, image->texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+
+	image->angle = 0;
+
+	return image;
 }
 
 Image* Graphics::NewImage(char* file)
@@ -23,7 +47,7 @@ Image* Graphics::NewImage(char* file)
 	return image;
 }
 
-Image* Graphics::NewTextImage(char* message, char* fontFile, int r, int g, int b, int a, int fontSize)
+Image* Graphics::NewTextImage(char* message, char* fontFile, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int fontSize)
 {
 	TTF_Font* font = TTF_OpenFont(fontFile, fontSize);
 

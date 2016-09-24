@@ -3,5 +3,5 @@
 int SDL_main(int argc, char *argv[])
 {
 	Game game;
-	return game.Execute(new Screen(), "GameProject", 800, 600);
+	return game.Execute(new Game_Play(), "GameProject", 800, 600);
 }

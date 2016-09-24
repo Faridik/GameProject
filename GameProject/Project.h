@@ -11,4 +11,6 @@
 #include "Graphics.h"
 #include "Image.h"
 
+#include "Game_Play.h"
+
 #endif

@@ -1,11 +1,3 @@
-﻿  Screen.cpp
-  main.cpp
-  Input.cpp
-  Image.cpp
-c:\projects\gameproject\gameproject\image.cpp(14): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-c:\projects\gameproject\gameproject\image.cpp(20): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-  Graphics.cpp
-  Game.cpp
-  Создание кода...
+﻿  Graphics.cpp
   GameProject.vcxproj -> C:\Projects\GameProject\Debug\GameProject.exe
   GameProject.vcxproj -> C:\Projects\GameProject\Debug\GameProject.pdb (Partial PDB)
